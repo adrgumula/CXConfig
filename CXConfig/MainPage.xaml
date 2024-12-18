@@ -28,6 +28,11 @@
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level2"
                     SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                <Stepper 
+                    Maximum="360"
+                    Increment="30"
+                    HorizontalOptions="Center"
+                    ValueChanged="OnStepperValueChanged" />
 
                 <Button
                     x:Name="CounterBtn2"
@@ -56,7 +61,11 @@
                     Style="{StaticResource SubHeadline}"
                     SemanticProperties.HeadingLevel="Level2"
                     SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
-
+                <Slider 
+                    Maximum="360"
+                    Minimum="0"
+                    
+                    ValueChanged="OnSliderValueChanged" />
                 <Button
                     x:Name="CounterBtn"
                     Text="Click me" 

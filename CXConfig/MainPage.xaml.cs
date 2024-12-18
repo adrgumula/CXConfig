@@ -2,13 +2,18 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	private int count = 0;
+	private readonly int sliderIncrement = 5;
 
 	public MainPage()
 	{
 		InitializeComponent();
 	}
 
+	private void Refresh(){
+		// SemanticScreenReader.Announce(CounterBtn.Text);
+		// SemanticScreenReader.Announce(CounterBtn2.Text);
+	}
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
 		count++;
@@ -20,9 +25,18 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 		}
 		CounterBtn2.Text = CounterBtn.Text;
+		Refresh();
+	}
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-		SemanticScreenReader.Announce(CounterBtn2.Text);
+	private void OnSliderValueChanged(object sender, ValueChangedEventArgs e){
+		var sliderCorrectValue = (int)(e.NewValue / sliderIncrement) * sliderIncrement;
+		CounterBtn2.Text = CounterBtn.Text = sliderCorrectValue.ToString();
+		//Refresh();
+	}
+
+	private void OnStepperValueChanged(object sender, ValueChangedEventArgs e){
+		CounterBtn2.Text = CounterBtn.Text = e.NewValue.ToString();
+		//Refresh();
 	}
 }
 
