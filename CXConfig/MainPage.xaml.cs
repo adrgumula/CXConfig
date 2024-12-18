@@ -13,12 +13,16 @@ public partial class MainPage : ContentPage
 	{
 		count++;
 
-		if (count == 1)
+		if (count == 1){
 			CounterBtn.Text = $"Clicked {count} time";
-		else
+		}
+		else{
 			CounterBtn.Text = $"Clicked {count} times";
+		}
+		CounterBtn2.Text = CounterBtn.Text;
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
+		SemanticScreenReader.Announce(CounterBtn2.Text);
 	}
 }
 
