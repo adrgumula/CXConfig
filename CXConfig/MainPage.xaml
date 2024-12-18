@@ -38,7 +38,8 @@
             </VerticalStackLayout>
             <VerticalStackLayout
                 Padding="30,0"
-                Spacing="25">
+                Spacing="25"
+                Grid.Column="1">
                 <Image
                     Source="dotnet_bot.png"
                     HeightRequest="185"
