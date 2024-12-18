@@ -63,7 +63,9 @@
 	<ItemGroup>
 	  <Folder Include="Resources/Assets/" />
 	  <Folder Include="Resources/Assets/Crossover/" />
+	  <Folder Include="Resources/Assets/CrossoverBottle/" />
 	  <Folder Include="Resources/Assets/CrossOverPatched/" />
+	  <Folder Include="Resources/Assets/CrossoverPatchedBottle/" />
 	</ItemGroup>
 
 </Project>
