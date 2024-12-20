@@ -1,5 +1,9 @@
 ﻿namespace CXConfig;
+
 using System.Linq;
+using System.IO;
+using System.Diagnostics;
+
 public partial class MainPage : ContentPage
 {
 	private int count = 0;
@@ -13,8 +17,13 @@ public partial class MainPage : ContentPage
 
 	private string GetCXPatchedBottlesFolder(){
 		var homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-		var parts = homeDirectory.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
-		var localFolderName = System.IO.Path.Combine(@"/",parts[0], parts[1], "CXPBottles");
+#if DEBUG
+		//var parts = homeDirectory.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+		//var localFolderName = Path.Combine(@"/",parts[0], parts[1], "CXPBottles");
+		var localFolderName = Path.Combine(@"/", homeDirectory, "CXPBottles");
+#else
+		var localFolderName = Path.Combine(@"/", homeDirectory, "CXPBottles");
+#endif
 		return localFolderName;
 	}
 	private void UpdateTheListview()
@@ -28,7 +37,7 @@ public partial class MainPage : ContentPage
 
 		try
 		{
-			var foldersFullPath = System.IO.Directory.GetDirectories(cxpatchedBottlesFolder);
+			var foldersFullPath = Directory.GetDirectories(cxpatchedBottlesFolder);
 			if (foldersFullPath is not null)
 			{
 				foreach (var folder in foldersFullPath)
@@ -44,8 +53,22 @@ public partial class MainPage : ContentPage
 			}
 
 		}
-		catch (System.Exception ex)
+		catch (Exception ex)
 		{
+			CXConfig.Method.MessageBox.Show("Exception occured", $"Message: {ex.ToString()}");
+			// Task.Run(async () =>
+			// {
+			// 	await Task.Delay(2000);
+			// 	App.AlertSvc.ShowConfirmation(
+			// 		"Exception occured", $"Message: {ex.ToString()}", 
+			// 		(
+			// 			result => {
+			// 				//App.AlertSvc.ShowAlert("Result", $"{result}");
+			// 			}
+			// 		)
+			// 	);
+			// });
+			Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
 			for (var i = 1; i < 25; ++i)
 				list.Add($"CXPatcher bottle {i}");
 		}

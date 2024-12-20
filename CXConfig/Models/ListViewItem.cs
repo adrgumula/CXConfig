@@ -1,3 +1,4 @@
+namespace CXConfig.View;
 public class ListViewItem
 {
     public ListViewItem(string name, string folderFullPath, string configFullPath, string alternativeConfigFileFullpath){
