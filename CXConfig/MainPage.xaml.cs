@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using CXConfig.View;
 using CXConfig.Methods;
+using CallKit;
 
 public partial class MainPage : ContentPage
 {
@@ -26,9 +27,9 @@ public partial class MainPage : ContentPage
 #if DEBUG
 		//var parts = homeDirectory.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
 		//var localFolderName = Path.Combine(@"/",parts[0], parts[1], "CXPBottles");
-		var localFolderName = Path.Combine(@"/", homeDirectory, "CXPBottles");
+		var localFolderName = Path.Combine(@"/", homeDirectory, Common.Names.CXPatcherBottleFolderName);
 #else
-		var localFolderName = Path.Combine(@"/", homeDirectory, "CXPBottles");
+		var localFolderName = Path.Combine(@"/", homeDirectory, Common.Names.CXPatcherBottleFolderName);
 #endif
 		return localFolderName;
 	}
