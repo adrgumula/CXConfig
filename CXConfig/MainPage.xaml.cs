@@ -3,16 +3,21 @@
 using System.Linq;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
+using CXConfig.View;
 
 public partial class MainPage : ContentPage
 {
 	private int count = 0;
 	private readonly int sliderIncrement = 5;
 
+	protected ObservableCollection<BottleItem> BottleItems { get; set; }
+
 	public MainPage()
 	{
 		InitializeComponent();
 		UpdateTheListview();
+		BottleItems = new ObservableCollection<BottleItem>();
 	}
 
 	private string GetCXPatchedBottlesFolder(){
@@ -28,8 +33,6 @@ public partial class MainPage : ContentPage
 	}
 	private void UpdateTheListview()
 	{
-		var list = new List<string>();
-
 		// @"c:\", "p*", SearchOption.TopDirectoryOnly
 
 		//homeDirectory = new NSFileManager().GetUrls(NSSearchPathDirectory.DesktopDirectory, NSSearchPathDomain.User)[0].Path;
@@ -40,6 +43,7 @@ public partial class MainPage : ContentPage
 			var foldersFullPath = Directory.GetDirectories(cxpatchedBottlesFolder);
 			if (foldersFullPath is not null)
 			{
+				BottleItems.Clear();
 				foreach (var folder in foldersFullPath)
 				{
 
@@ -48,7 +52,14 @@ public partial class MainPage : ContentPage
 
 					// //var lastDirectoryName = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar));
 
-					list.Add(parts.Last());
+					//list.Add(parts.Last());
+					BottleItems.Add(new BottleItem(
+						parts.Last(),
+						folder,
+						string.Empty,
+						"Description",
+						string.Empty
+					));
 				}
 			}
 
@@ -67,13 +78,13 @@ public partial class MainPage : ContentPage
 				"Cancel");
 
 
-			Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
+			//Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
 			// for (var i = 1; i < 25; ++i)
 			// 	list.Add($"CXPatcher bottle {i}");
 		}
 
 
-		listOfCXBottles.ItemsSource = list;
+		listOfCXBottles.ItemsSource = BottleItems;
 	}
 
 	private void Refresh(){

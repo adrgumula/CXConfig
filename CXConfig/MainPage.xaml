@@ -42,12 +42,39 @@
         </VerticalStackLayout>
         <ScrollView
             Grid.Column="0">
-            <ListView 
+            <!-- <ListView 
                 x:Name="listOfCXBottles"
                 BackgroundColor="Transparent">
+            </ListView> -->
+            <ListView 
+                ItemsSource="{Binding BottleItems}"
+                x:Name="listOfCXBottles">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"
+                                    Text="{Binding Name}"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="Start"/>
+                                <Label Grid.Row="1"
+                                    Text="{Binding Description}"
+                                    FontAttributes="Italic"
+                                    HorizontalOptions="End"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </ScrollView>
-        <!-- <ListView ItemsSource="{Binding Monkeys}">
+        <!-- <ListView ItemsSource="{Binding BottleItems}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
