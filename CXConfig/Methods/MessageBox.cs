@@ -20,4 +20,18 @@ public static class MessageBox{
 				);
 			});
     }
+
+	public static void ShowCallback(string title, string content, Action<bool>? callback = null, string accept = "Yes", string cancel = "No"){
+					Task.Run(async () =>
+			{
+				await Task.Delay(2000);
+				App.AlertSvc.ShowConfirmation(
+					title, 
+                    $"Message: {content}", 
+					callback,
+					accept,
+					cancel
+				);
+			});
+	}
 }

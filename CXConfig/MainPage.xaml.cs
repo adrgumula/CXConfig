@@ -55,19 +55,15 @@ public partial class MainPage : ContentPage
 		}
 		catch (Exception ex)
 		{
-			CXConfig.Method.MessageBox.Show("Exception occured", $"Message: {ex.ToString()}");
-			// Task.Run(async () =>
-			// {
-			// 	await Task.Delay(2000);
-			// 	App.AlertSvc.ShowConfirmation(
-			// 		"Exception occured", $"Message: {ex.ToString()}", 
-			// 		(
-			// 			result => {
-			// 				//App.AlertSvc.ShowAlert("Result", $"{result}");
-			// 			}
-			// 		)
-			// 	);
-			// });
+
+			CXConfig.Method.MessageBox.ShowCallback(
+				"Pemition needed", 
+				"Pemition needed", 
+				val => { },
+				"Repeat", 
+				"Cancel");
+
+
 			Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
 			for (var i = 1; i < 25; ++i)
 				list.Add($"CXPatcher bottle {i}");
