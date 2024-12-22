@@ -43,12 +43,12 @@ public partial class MainPage : ContentPage
 				foreach (var folder in foldersFullPath)
 				{
 
-					// var parts = folder.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+					var parts = folder.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
 					// var localFolderName = System.IO.Path.Combine(parts[0], parts[1]);
 
 					// //var lastDirectoryName = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar));
 
-					list.Add(folder);
+					list.Add(parts.Last());
 				}
 			}
 
