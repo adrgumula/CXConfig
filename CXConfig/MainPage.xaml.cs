@@ -5,6 +5,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using CXConfig.View;
+using CXConfig.Methods;
 
 public partial class MainPage : ContentPage
 {
@@ -67,7 +68,7 @@ public partial class MainPage : ContentPage
 		catch (Exception ex)
 		{
 
-			CXConfig.Method.MessageBox.ShowCallback(
+            MessageBox.ShowCallback(
 				"Pemition needed", 
 				"In order to access the user folder you have to give full disk access this applicaiton", 
 				val => { 
