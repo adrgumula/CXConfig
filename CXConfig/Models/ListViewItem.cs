@@ -1,5 +1,5 @@
 namespace CXConfig.View;
-public class BottleViewItem
+public class BottleItem
 {
     public BottleItem(string name, string folderFullPath, string configFullPath, string alternativeConfigFileFullpath){
         Name = name;
