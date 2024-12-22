@@ -58,15 +58,18 @@ public partial class MainPage : ContentPage
 
 			CXConfig.Method.MessageBox.ShowCallback(
 				"Pemition needed", 
-				"Pemition needed", 
-				val => { },
+				"In order to access the user folder you have to give full disk access this applicaiton", 
+				val => { 
+					if(val) 
+						Device.BeginInvokeOnMainThread(UpdateTheListview);
+				},
 				"Repeat", 
 				"Cancel");
 
 
 			Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
-			for (var i = 1; i < 25; ++i)
-				list.Add($"CXPatcher bottle {i}");
+			// for (var i = 1; i < 25; ++i)
+			// 	list.Add($"CXPatcher bottle {i}");
 		}
 
 
