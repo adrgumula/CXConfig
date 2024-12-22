@@ -1,7 +1,7 @@
 namespace CXConfig.View;
-public class ListViewItem
+public class BottleViewItem
 {
-    public ListViewItem(string name, string folderFullPath, string configFullPath, string alternativeConfigFileFullpath){
+    public BottleItem(string name, string folderFullPath, string configFullPath, string alternativeConfigFileFullpath){
         Name = name;
         FolderFullPath = folderFullPath;
         ConfigFileFullPath = configFullPath;
