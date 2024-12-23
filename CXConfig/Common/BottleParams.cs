@@ -24,6 +24,12 @@ public static class BottleParams
     public static readonly string[] MTL_HUD_ENABLED_PARAMS = ["0", "1"];
 
     public const string DXMT_CONFIG = "DXMT_CONFIG";
+    public const string DXMT_CONFIG_METAL_SPATIAL_UPSCALE_FACTOR = "d3d11.metalSpatialUpscaleFactor";
+    public static readonly float[] DXMT_CONFIG_METAL_SPATIAL_UPSCALE_FACTOR_PARAMS = [1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f];
+
+    public const string DXMT_CONFIG_METAL_PREFERED_MAX_FRAME_RATE = "d3d11.preferredMaxFrameRate";
+    public static readonly float[] DXMT_CONFIG_METAL_PREFERED_MAX_FRAME_RATE_PARAMS = [30.0f, 60.0f, 120.0f, 240.0f];
+
     public static readonly string[] DXMT_CONFIG_PARAMS = ["0", "1"];
     
     public const string DXMT_METALFX_SPATIAL_SWAPCHAIN = "DXMT_METALFX_SPATIAL_SWAPCHAIN";
