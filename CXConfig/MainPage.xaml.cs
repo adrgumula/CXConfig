@@ -40,9 +40,12 @@ public partial class MainPage : ContentPage
 		//homeDirectory = new NSFileManager().GetUrls(NSSearchPathDirectory.DesktopDirectory, NSSearchPathDomain.User)[0].Path;
 		var cxpatchedBottlesFolder = GetCXPatchedBottlesFolder();
 
+		//MessageBox.ShowCallback("Info", $"FolderName: '{cxpatchedBottlesFolder}'");
+		//Console.WriteLine($"Processing: '{cxpatchedBottlesFolder}'");
 		try
 		{
 			var foldersFullPath = Directory.GetDirectories(cxpatchedBottlesFolder);
+
 			if (foldersFullPath is not null)
 			{
 				BottleItems.Clear();
@@ -50,6 +53,8 @@ public partial class MainPage : ContentPage
 				{
 
 					var parts = folder.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
+					var bottleConfigFileFullPath = Path.Combine(folder, Common.Files.CXBottleConfig);
+					var bottleDictionary = Common.BottlesConfigFileProcessor.PhaseFile(bottleConfigFileFullPath);
 					// var localFolderName = System.IO.Path.Combine(parts[0], parts[1]);
 
 					// //var lastDirectoryName = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar));
@@ -60,7 +65,8 @@ public partial class MainPage : ContentPage
 						folder,
 						string.Empty,
 						"Description",
-						string.Empty
+						string.Empty,
+						bottleDictionary
 					));
 				}
 			}
@@ -70,8 +76,8 @@ public partial class MainPage : ContentPage
 		{
 
             MessageBox.ShowCallback(
-				"Pemition needed", 
-				"In order to access the user folder you have to give full disk access this applicaiton", 
+				"Permission needed", 
+				"To access the user folder, this application requires Full Disk Access permissions. Please enable Full Disk Access for this application in your system’s settings to proceed.", 
 				val => { 
 					if(val) 
 						Device.BeginInvokeOnMainThread(UpdateTheListview);
@@ -80,7 +86,7 @@ public partial class MainPage : ContentPage
 				"Cancel");
 
 
-			//Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
+			Debug.WriteLine($"Exception: {ex.ToString()} - {ex.InnerException?.ToString()}");
 			// for (var i = 1; i < 25; ++i)
 			// 	list.Add($"CXPatcher bottle {i}");
 		}

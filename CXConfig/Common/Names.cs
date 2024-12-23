@@ -4,8 +4,8 @@ namespace CXConfig.Common;
 
 public static class Names
 {
-    public const string CXPatcherBottleFolderName = "CXPBottle";
-    public const string BottleConfigFileEntryRegEx = "\"([^\"]+)\"\\s*=\\s*\"([^\"]+)\"";
+    public const string CXPatcherBottleFolderName = "CXPBottles";
+    public const string BottleConfigFileEntryRegEx = @"^\s*""([^""]+)""\s*=\s*""([^""]+)"""; //"\"([^\"]+)\"\\s*=\\s*\"([^\"]+)\"";
 }
 
 public static class Files
