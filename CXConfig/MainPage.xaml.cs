@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using CXConfig.View;
 using CXConfig.Methods;
-using CallKit;
 
 public partial class MainPage : ContentPage
 {
@@ -14,12 +13,37 @@ public partial class MainPage : ContentPage
 	private readonly int sliderIncrement = 5;
 
 	protected ObservableCollection<BottleItem> BottleItems { get; set; }
+	public List<string> ComboBoxItems { get; set; }
+
 
 	public MainPage()
 	{
 		InitializeComponent();
 		UpdateTheListview();
 		BottleItems = new ObservableCollection<BottleItem>();
+
+		ComboBoxItems = new List<string> { "Option 1", "Option 2", "Option 3", "Option 4" };
+
+		BindingContext = this;
+
+		// Add gesture to toggle dropdown visibility
+		var tapGesture = new TapGestureRecognizer();
+		tapGesture.Tapped += (s, e) =>
+		{
+			ComboBoxListView.IsVisible = !ComboBoxListView.IsVisible;
+		};
+		ComboBoxFrame.GestureRecognizers.Add(tapGesture);
+
+		// Handle item selection
+		ComboBoxListView.ItemSelected += (s, e) =>
+		{
+			if (e.SelectedItem != null)
+			{
+				ComboBoxLabel.Text = e.SelectedItem.ToString();
+				SelectedLabel.Text = $"Selected: {e.SelectedItem}";
+				ComboBoxListView.IsVisible = false;
+			}
+		};
 	}
 
 	private string GetCXPatchedBottlesFolder(){
@@ -51,23 +75,24 @@ public partial class MainPage : ContentPage
 				BottleItems.Clear();
 				foreach (var folder in foldersFullPath)
 				{
-
 					var parts = folder.Trim(Path.DirectorySeparatorChar).Split(Path.DirectorySeparatorChar);
 					var bottleConfigFileFullPath = Path.Combine(folder, Common.Files.CXBottleConfig);
 					var bottleDictionary = Common.BottlesConfigFileProcessor.PhaseFile(bottleConfigFileFullPath);
-					// var localFolderName = System.IO.Path.Combine(parts[0], parts[1]);
+                    // var localFolderName = System.IO.Path.Combine(parts[0], parts[1]);
 
-					// //var lastDirectoryName = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar));
+                    // //var lastDirectoryName = Path.GetFileName(folder.TrimEnd(Path.DirectorySeparatorChar));
 
-					//list.Add(parts.Last());
-					BottleItems.Add(new BottleItem(
-						parts.Last(),
-						folder,
-						string.Empty,
-						"Description",
-						string.Empty,
-						bottleDictionary
-					));
+                    //list.Add(parts.Last());
+                    BottleItems.Add(
+						new BottleItem(
+                        	parts.Last(),
+                        	folder,
+							string.Empty,
+							"Description",
+							string.Empty,
+							bottleDictionary
+						)
+					);
 				}
 			}
 
@@ -104,22 +129,22 @@ public partial class MainPage : ContentPage
 		count++;
 
 		if (count == 1){
-			CounterBtn2.Text = $"Clicked {count} time";
+			//CounterBtn2.Text = $"Clicked {count} time";
 		}
 		else{
-			CounterBtn2.Text = $"Clicked {count} times";
+			//CounterBtn2.Text = $"Clicked {count} times";
 		}
 		Refresh();
 	}
 
 	private void OnSliderValueChanged(object sender, ValueChangedEventArgs e){
 		var sliderCorrectValue = (int)(e.NewValue / sliderIncrement) * sliderIncrement;
-		CounterBtn2.Text = sliderCorrectValue.ToString();
+		//CounterBtn2.Text = sliderCorrectValue.ToString();
 		//Refresh();
 	}
 
 	private void OnStepperValueChanged(object sender, ValueChangedEventArgs e){
-		CounterBtn2.Text = e.NewValue.ToString();
+		//CounterBtn2.Text = e.NewValue.ToString();
 		//Refresh();
 	}
 }

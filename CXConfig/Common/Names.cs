@@ -6,6 +6,7 @@ public static class Names
 {
     public const string CXPatcherBottleFolderName = "CXPBottles";
     public const string BottleConfigFileEntryRegEx = @"^\s*""([^""]+)""\s*=\s*""([^""]+)"""; //"\"([^\"]+)\"\\s*=\\s*\"([^\"]+)\"";
+    public const string BottleConfigFileCommentedLine  = ";;";
 }
 
 public static class Files

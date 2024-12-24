@@ -22,7 +22,7 @@ public class BottlesConfigFileProcessor
 
             foreach (var line in lines)
             {
-                if(line.StartsWith(";;"))
+                if(line.StartsWith(Names.BottleConfigFileCommentedLine))
                     continue;
                 // Match the line against the regular expression
                 var matches = regex.Matches(line);
